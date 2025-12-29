@@ -1,0 +1,209 @@
+:root {
+  --font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --bg-color: #0f0f13;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  
+  --primary-gradient: linear-gradient(135deg, #00f2ff 0%, #00c3ff 100%);
+  --secondary-gradient: linear-gradient(135deg, #b000ff 0%, #da00ff 100%);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  
+  --key-bg: rgba(255, 255, 255, 0.03);
+  --key-hover: rgba(255, 255, 255, 0.1);
+  --key-active: rgba(255, 255, 255, 0.2);
+  
+  --operator-color: #00f2ff;
+  --action-color: #ff0055;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none; /* Prevent text selection on rapid clicks */
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(0, 242, 255, 0.1) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(176, 0, 255, 0.1) 0%, transparent 20%);
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calculator {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 400px; /* Mobile first, but spacious */
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: transform 0.3s ease;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Display Area */
+.display {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 120px;
+  overflow: hidden;
+  position: relative;
+}
+
+.history {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  min-height: 1.2em;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.current-input {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  word-break: break-all;
+  line-height: 1.1;
+  transition: font-size 0.2s; /* Dynamic resizing if needed */
+}
+
+/* Keypad */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+button {
+  border: 1px solid var(--glass-border);
+  background: var(--key-bg);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 1.2rem;
+  padding: 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease-out, height 0.3s ease-out;
+}
+
+button:active::after {
+  width: 200px;
+  height: 200px;
+}
+
+button:hover {
+  background: var(--key-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  border-color: rgba(255,255,255,0.2);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Special Keys */
+.btn-operator {
+  color: var(--operator-color);
+  font-weight: 600;
+}
+
+.btn-action {
+  color: var(--action-color);
+  font-weight: 600;
+}
+
+.btn-equals {
+  background: var(--primary-gradient);
+  border: none;
+  color: #000; /* Contrast */
+  font-weight: 700;
+  grid-column: span 2; /* Make it wider */
+}
+
+.btn-equals:hover {
+  box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+}
+
+.btn-sci {
+  font-size: 0.9rem;
+  color: #b000ff; /* Secondary accent */
+  font-weight: 500;
+}
+
+/* Scientific Section Toggle (Optional visual separation) */
+.sci-row {
+  grid-column: span 4;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+@media (max-width: 400px) {
+  .calculator {
+    width: 95%;
+    padding: 16px;
+  }
+  .display {
+    height: 100px;
+  }
+  .current-input {
+    font-size: 2rem;
+  }
+  button {
+    padding: 14px;
+    font-size: 1rem;
+  }
+}

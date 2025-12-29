@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SciCalc</title>
+  <!-- Google Fonts for Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="app">
+    <div class="calculator">
+      <div class="display">
+        <div class="history" id="history"></div>
+        <div class="current-input" id="display">0</div>
+      </div>
+
+      <div class="keypad">
+        <!-- Scientific Row 1 -->
+        <button class="btn-sci" data-action="sin">sin</button>
+        <button class="btn-sci" data-action="cos">cos</button>
+        <button class="btn-sci" data-action="tan">tan</button>
+        <button class="btn-sci" data-action="log">log</button>
+
+        <!-- Scientific Row 2 -->
+        <button class="btn-sci" data-action="sqrt">√</button>
+        <button class="btn-sci" data-action="pow">x^y</button>
+        <button class="btn-sci" data-action="pi">π</button>
+        <button class="btn-sci" data-action="e">e</button>
+
+        <!-- Clear & Brackets -->
+        <button class="btn-action" data-action="clear-all">AC</button>
+        <button class="btn-action" data-action="clear-entry">CE</button>
+        <button class="btn-operator" data-action="(">(</button>
+        <button class="btn-operator" data-action=")">)</button>
+
+        <!-- Numpad & Operators -->
+        <button data-num="7">7</button>
+        <button data-num="8">8</button>
+        <button data-num="9">9</button>
+        <button class="btn-operator" data-action="/">÷</button>
+
+        <button data-num="4">4</button>
+        <button data-num="5">5</button>
+        <button data-num="6">6</button>
+        <button class="btn-operator" data-action="*">×</button>
+
+        <button data-num="1">1</button>
+        <button data-num="2">2</button>
+        <button data-num="3">3</button>
+        <button class="btn-operator" data-action="-">−</button>
+
+        <button data-num="0">0</button>
+        <button data-num=".">.</button>
+        <button class="btn-operator" data-action="+">+</button>
+        <button class="btn-equals" data-action="calculate" style="grid-column: span 1;">=</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
